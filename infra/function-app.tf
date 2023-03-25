@@ -42,8 +42,16 @@ resource "azurerm_linux_function_app" "linux" {
   app_settings = {
     ACCOUNT_URI = azurerm_cosmosdb_account.projeto_iot.endpoint
     ACCOUNT_KEY = azurerm_cosmosdb_account.projeto_iot.primary_key
-    DATABASE_NAME = "${var.PROJECT_NAME}-sql-db"
-    USERS_CONTAINER = "users"
-    LOGS_CONTAINER = "access_logs"
+    DATABASE_NAME = azurerm_cosmosdb_sql_database.db.name
+    USERS_CONTAINER = azurerm_cosmosdb_sql_container.users.name
+    LOGS_CONTAINER = azurerm_cosmosdb_sql_container.access_logs.name
+    SERVICE_BUS_CONNECTION = azurerm_servicebus_namespace.projeto_iot.default_primary_connection_string
+    SERVICE_BUS_QUEUE_NAME = azurerm_servicebus_queue.access_log.name
+  }
+
+  lifecycle {
+    ignore_changes = [
+      tags
+    ]
   }
 }
