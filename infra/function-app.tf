@@ -47,7 +47,7 @@ resource "azurerm_linux_function_app" "linux" {
     LOGS_CONTAINER = azurerm_cosmosdb_sql_container.access_logs.name
     SERVICE_BUS_CONNECTION = azurerm_servicebus_namespace.projeto_iot.default_primary_connection_string
     SERVICE_BUS_QUEUE_NAME = azurerm_servicebus_queue.access_log.name
-    AZURE_STORAGE_IMAGES_CONNECTION_STRING = azurerm_storage_account.images.primary_access_key
+    AZURE_STORAGE_IMAGES_CONNECTION_STRING = azurerm_storage_account.images.primary_connection_string
   }
 
   lifecycle {
