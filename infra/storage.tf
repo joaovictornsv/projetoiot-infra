@@ -9,11 +9,11 @@ resource "azurerm_storage_account" "images" {
 resource "azurerm_storage_container" "users" {
   name                  = "users"
   storage_account_name  = azurerm_storage_account.images.name
-  container_access_type = "private"
+  container_access_type = "blob"
 }
 
 resource "azurerm_storage_container" "access" {
   name                  = "access"
   storage_account_name  = azurerm_storage_account.images.name
-  container_access_type = "private"
+  container_access_type = "blob"
 }
